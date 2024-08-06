@@ -6,13 +6,9 @@ import json
 import TwitchAccessToken
 import Credentials
 
-##########################################################
-#                Configure your stuff here               #
-##########################################################
-
-clientId = Credentials.client_id  # Register a Twitch Developer application and put its client ID here
-accessToken = Credentials.subOAuthToken  # Generate an OAuth token with channel_subscriptions scope and insert your token here
-channelName = Credentials.channelName  # Put your channel name here
+clientId = Credentials.client_id
+accessToken = Credentials.subOAuthToken
+channelName = Credentials.channelName
 
 def getSubList():
     session = Session()
@@ -24,7 +20,6 @@ def getSubList():
     session.mount('https://', retryAdapter)
     session.mount('http://', retryAdapter)
 
-    # Find the Channel ID
     response = session.get(channelIdUrl, headers={
         'Client-ID': clientId,
         'Authorization': f'Bearer {accessToken}',

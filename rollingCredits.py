@@ -3,6 +3,7 @@ import pygame
 import sys
 from datetime import datetime
 
+
 def rolling_credits(file_path, subList, followerList):
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
@@ -20,28 +21,26 @@ def rolling_credits(file_path, subList, followerList):
     text_color = (255, 255, 255)  # White
 
     # Get current date
-    current_date = datetime.now().strftime("%Y-%m-%d")
+    current_date = datetime.now().strftime("%m-%d-%Y")
 
     # Read credits and insert dynamic header
     credits = []
-    credits.insert(0, f"#HEADER# {Credentials.channelName}\n")
-    credits.insert(1, f"#HEADER# {current_date} Stream Credits\n")
-    credits.insert(2, f"##SUBHEADER## Streamer\n")
-    credits.insert(3, f'{Credentials.channelName}\n')
-    credits.insert(4, f"##SUBHEADER## Subscribers\n")
+    credits.append(f"#HEADER# {Credentials.channelName}\n")
+    credits.append(f"#HEADER# {current_date} Stream Credits\n")
+    credits.append(f"##SUBHEADER## Streamer\n")
+    credits.append(f'{Credentials.channelName}\n')
+    credits.append(f"##SUBHEADER## Subscribers\n")
 
-    subCount = 5
     for sub in subList:
-        credits.insert(subCount, f"{sub}\n")
-        subCount += 1
+        credits.append(f"{sub}\n")
 
-    credits.insert(subCount, f"##SUBHEADER## Followers\n")
-    followCount = subCount + 1
-    for follower in followerList:
-        credits.insert(followCount, f"{follower}\n")
-        followCount += 1
-    credits.insert(followCount, "\n")
-    credits.insert(followCount+1, f"#HEADER# Thanks for watching!")
+    credits.append(f"##SUBHEADER## Followers\n")
+    for i in range(0, len(followerList), 3):
+        follower_line = '    '.join(followerList[i:i + 3])  # Adjust the spacing between columns if needed
+        credits.append(f"{follower_line}\n")
+
+    credits.append("\n")
+    credits.append(f"#HEADER# Thanks for watching!")
 
     # Load scrolling image
     try:
@@ -51,7 +50,8 @@ def rolling_credits(file_path, subList, followerList):
         pygame.quit()
         sys.exit()
 
-    scrolling_image_rect = scrolling_image.get_rect(center=(screen.get_width() // 2, screen.get_height()))  # Start below the screen
+    scrolling_image_rect = scrolling_image.get_rect(
+        center=(screen.get_width() // 2, screen.get_height()))  # Start below the screen
 
     # Load static image
     try:
@@ -61,7 +61,8 @@ def rolling_credits(file_path, subList, followerList):
         pygame.quit()
         sys.exit()
 
-    static_image_rect = static_image.get_rect(bottomright=(screen.get_width(), screen.get_height()))  # Bottom right corner
+    static_image_rect = static_image.get_rect(
+        bottomright=(screen.get_width(), screen.get_height()))  # Bottom right corner
 
     text_y = screen.get_height()
 
@@ -117,7 +118,7 @@ def rolling_credits(file_path, subList, followerList):
         text_y -= 1
 
         # Stop scrolling once the credits and image have moved off the screen
-        if y_offset < 0 and text_y + total_height < 0:
+        if y_offset < 0 and scrolling_image_rect.y + total_height < 0:
             break
 
         pygame.display.flip()

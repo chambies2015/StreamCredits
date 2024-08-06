@@ -3,9 +3,12 @@ import Credentials
 
 client_id = Credentials.client_id
 client_secret = Credentials.client_secret
-authorization_code = Credentials.followerOAuthToken  # Authorization code from Twitch
+authorization_code = Credentials.followerOAuthToken
 redirect_uri = Credentials.redirect_uri
 
+
+# This isn't used since we just use the link provided in the credentialsExample to generate our OAuth tokens for
+# both sub and follower methods with different scopes.
 def get_access_token():
     url = 'https://id.twitch.tv/oauth2/token'
     headers = {
