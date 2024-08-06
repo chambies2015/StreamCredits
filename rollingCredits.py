@@ -3,10 +3,6 @@ import pygame
 import sys
 from datetime import datetime
 
-def read_credits(file_path):
-    with open(file_path, 'r') as file:
-        return file.readlines()
-
 def rolling_credits(file_path, subList, followerList):
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
@@ -27,7 +23,7 @@ def rolling_credits(file_path, subList, followerList):
     current_date = datetime.now().strftime("%Y-%m-%d")
 
     # Read credits and insert dynamic header
-    credits = read_credits(file_path)
+    credits = []
     credits.insert(0, f"#HEADER# {Credentials.channelName}\n")
     credits.insert(1, f"#HEADER# {current_date} Stream Credits\n")
     credits.insert(2, f"##SUBHEADER## Producer\n")

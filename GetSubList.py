@@ -65,7 +65,6 @@ def getSubList():
             for sub in result["data"]:
                 name = sub.get('user_name')
                 if name != 'Chambiez':
-                    print(name)
                     subList.append(name)
         else:
             break
