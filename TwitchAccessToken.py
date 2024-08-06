@@ -28,7 +28,3 @@ def get_access_token():
     else:
         raise Exception(f"Error: {response.status_code} - {response.text}")
 
-# Example usage
-if __name__ == "__main__":
-    access_token = get_access_token()
-    print("Access Token:", access_token)

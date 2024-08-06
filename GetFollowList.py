@@ -26,7 +26,3 @@ def get_followers():
         for follow in response_data['data']:
             followers.append(follow['user_name'])  # Extract follower names
     return followers
-
-
-if __name__ == "__main__":
-    print(get_followers())

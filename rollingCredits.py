@@ -124,6 +124,3 @@ def rolling_credits(file_path, subList, followerList):
         clock.tick(60)
 
     print('done')
-
-if __name__ == "__main__":
-    rolling_credits('credits.txt', ['Alice', 'Bob', 'Charlie'], ['Follower1', 'Follower2'])

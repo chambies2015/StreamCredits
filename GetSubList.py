@@ -12,15 +12,11 @@ import Credentials
 
 clientId = Credentials.client_id  # Register a Twitch Developer application and put its client ID here
 accessToken = Credentials.subOAuthToken  # Generate an OAuth token with channel_subscriptions scope and insert your token here
-
-channelName = "chambiez"  # Put your channel name here
-saveLocation = "subscriberListTest.txt"  # Put the location you'd like to save your list here
-
-###################################################################
+channelName = Credentials.channelName  # Put your channel name here
 
 def getSubList():
     session = Session()
-    channelId = "81822499"
+    channelId = Credentials.broadcasterID
 
     channelIdUrl = "https://api.twitch.tv/helix/users?login=" + channelName
 
@@ -64,14 +60,8 @@ def getSubList():
         if (result):
             for sub in result["data"]:
                 name = sub.get('user_name')
-                if name != 'Chambiez':
+                if name != Credentials.channelName:
                     subList.append(name)
         else:
             break
         return subList
-
-    # if (result):
-    #     f = open(saveLocation, 'w')
-    #     for sub in subList:
-    #         f.write(sub + "\n")
-    #     f.close()
