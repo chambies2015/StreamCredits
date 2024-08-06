@@ -26,7 +26,7 @@ def rolling_credits(file_path, subList, followerList):
     credits = []
     credits.insert(0, f"#HEADER# {Credentials.channelName}\n")
     credits.insert(1, f"#HEADER# {current_date} Stream Credits\n")
-    credits.insert(2, f"##SUBHEADER## Producer\n")
+    credits.insert(2, f"##SUBHEADER## Streamer\n")
     credits.insert(3, f'{Credentials.channelName}\n')
     credits.insert(4, f"##SUBHEADER## Subscribers\n")
 
